@@ -9,9 +9,20 @@ my @plugins = do {
     grep { $_ ne '.' && $_ ne '..' } readdir($dir);
 };
 
+{
+    my ( $order, %order );
+    map { $order{$_} = $order++ } split /,/,
+      $ENV{TEMPLATE_LAYOUTS_SORTING_ORDER};
+
+    sub _order {
+        my ($plugin) = @_;
+        $order{$plugin} //= 999999;
+    }
+}
+
 my %files = ();
 
-foreach my $plugin (@plugins) {
+foreach my $plugin ( sort { _order($a) <=> _order($b) } @plugins ) {
     my $view_dir = "$plugins_dir/$plugin/src/views";
     next if !-d $view_dir;
     my $layout_dir = "$view_dir/layouts";

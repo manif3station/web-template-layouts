@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+[% FOREACH file IN vars.template.layouts.head; INCLUDE "$file"; END %]
+</head>
+<body>
+[% FOREACH file IN vars.template.layouts.before.content; INCLUDE "$file"; END %]
+[% content %]
+[% FOREACH file IN vars.template.layouts.after.content; INCLUDE "$file"; END %]
+</body>
+</html>
+[% FOREACH file IN vars.template.layouts.end; INCLUDE "$file"; END %]
