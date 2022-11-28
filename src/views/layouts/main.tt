@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html [% IF !vars.template.layouts.attrs.html %]lang="en"[% END %][% FOREACH file IN vars.template.layouts.attrs.html; INCLUDE "$file"; END %]>
+<head[% IF vars.template.layouts.attrs.head; ' '; END %][% FOREACH file IN vars.template.layouts.attrs.head; INCLUDE "$file"; END %]>
 [% FOREACH file IN vars.template.layouts.head; INCLUDE "$file"; END %]
 </head>
-<body>
+<body[% IF vars.template.layouts.attrs.body; ' '; END %][% FOREACH file IN vars.template.layouts.attrs.body; INCLUDE "$file"; END %]>
 [% FOREACH file IN vars.template.layouts.before.content; INCLUDE "$file"; END %]
 [% content %]
 [% FOREACH file IN vars.template.layouts.after.content; INCLUDE "$file"; END %]
